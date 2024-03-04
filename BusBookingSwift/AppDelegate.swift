@@ -1,3 +1,4 @@
+
 //
 //  AppDelegate.swift
 //  BusBookingSwift
@@ -8,10 +9,8 @@
 
 import UIKit
 
+
 import AEPCore
-import AEPEdgeConsent
-import AEPEdgeIdentity
-import AEPEdge
 import AEPAssurance
 import AEPAnalytics
 import AEPUserProfile
@@ -19,6 +18,8 @@ import AEPIdentity
 import AEPLifecycle
 import AEPSignal
 import AEPServices
+
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,31 +29,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        
-        
         MobileCore.setLogLevel(.debug)
         let appState = application.applicationState
         
         let extensions = [
-                          Consent.self,
-                          AEPEdgeIdentity.Identity.self,
-                          AEPIdentity.Identity.self,
-                          Edge.self,
                           Assurance.self,
                           Analytics.self,
                           UserProfile.self,
+                          Identity.self,
                           Lifecycle.self,
                           Signal.self
                         ]
         MobileCore.registerExtensions(extensions, {
-            MobileCore.configureWith(appId: "01030fe82917/2b9402e0cc03/launch-6bf959180ebb-development")
+            MobileCore.configureWith(appId: "01030fe82917/2b9402e0cc03/launch-632ec10ac5b9-development")
             if appState != .background {
                 MobileCore.lifecycleStart(additionalContextData: ["contextDataKey": "contextDataVal"])
             }
+        
+        
+        
         })
-        
-        
-        
         // Override point for customization after application launch.
         return true
     }
@@ -69,6 +65,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        
+        
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -80,7 +78,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        
         
         Assurance.startSession(url: url)
         return true
