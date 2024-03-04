@@ -8,7 +8,6 @@
 
 import UIKit
 import AEPCore
-import AEPEdge
 
 class BookingViewController: UIViewController {
 
@@ -16,37 +15,10 @@ class BookingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+       
+        let pageInfo = ["currentpage":"trackState-poc-BusBookHomePage", "logintype":"trackState-poc-simulator"]
         
-        let pageInfo = ["currentpage":"Sendevent-poc-trackstatefunction-BusBookHomePage", "logintype":"Sendevent-poc-trackstatefunction-simulator"]
-        
-        MobileCore.track(state: "Sendevent-poc-trackstatefunction-BusBookHomePage", data: pageInfo)
-        
-        let xdmData : [String:Any] = [
-            "_experience": [
-                "analytics": [
-                    "customDimensions": [
-                        "eVars": [
-                            "eVar78": "Sendevent-poc-sendEventfunction-BusBookHomePage",
-                            "eVar80": "Sendevent-poc-sendEventfunction-simulator"
-                        ],
-                        "props": [
-                            "prop35": "Sendevent-poc-sendEventfunction-BusBookHomePage"
-                        ]
-                    ],
-                    "event1to100": [
-                        "event1": [
-                            "value": 1
-                        ]
-                    ]
-                ]
-            ],
-            "eventType": "PageViews"
-        ]
-        
-        
-        
-        let event = ExperienceEvent(xdm: xdmData)
-        Edge.sendEvent(experienceEvent: event)
+        MobileCore.track(state: "trackState-poc-BusBookHomePage", data: pageInfo)
 
         // Do any additional setup after loading the view.
     }
@@ -57,36 +29,12 @@ class BookingViewController: UIViewController {
             self.nonStopButton.isSelected = false
         } else {
             self.nonStopButton.isSelected = true
-            let clickInfo = ["currentpage":"Sendevent-poc-trackactionfunction-BusBookHomePage", "logintype":"Sendevent-poc-trackactionfunction-simulator"]
+            let clickInfo = ["currentpage":"trackAction-poc-BusBookHomePage", "logintype":"trackAction-poc-simulator-toggle"]
             
+            MobileCore.track(action: "trackAction-poc-BusBookHomePage", data: clickInfo)
             
-            MobileCore.track(action: "Sendevent-poc-trackactionfunction-BusBookHomePage", data: clickInfo)
+                
             
-            let xdmData : [String:Any] = [
-                "_experience": [
-                    "analytics": [
-                        "customDimensions": [
-                            "eVars": [
-                                "eVar59": "Sendevent-poc-sendEventfunction-simulator",
-                                "eVar78": "Sendevent-poc-sendEventfunction-BusBookHomePage"
-                                
-                            ],
-                            "props": [
-                                "prop35": "Sendevent-poc-sendEventfunction-BusBookHomePage"
-                            ]
-                        ],
-                        "event1to100": [
-                            "event92": [
-                                "value": 1
-                            ]
-                        ]
-                    ]
-                ],
-                "eventType": "click"
-            ]
-            
-            let event = ExperienceEvent(xdm: xdmData)
-            Edge.sendEvent(experienceEvent: event)
         }
     }
     /*
@@ -100,3 +48,4 @@ class BookingViewController: UIViewController {
     */
 
 }
+
